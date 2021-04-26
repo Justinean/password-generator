@@ -2,12 +2,12 @@
 var generateBtn = document.querySelector("#generate");
 
 function passwordCriteria() {
-  let number, symbol, capital, length;
-  let strCriteria = ["number", "symbol", "capital", "length"]
-  let passCriteria = [number, symbol, capital, length = 0];
+  let number, symbol, capital, lower, length;
+  let strCriteria = ["number", "symbol", "capital", "lower", "length"]
+  let passCriteria = [number, symbol, capital, lower, length = 0];
 
   for (i=0; i < passCriteria.length; i++) {
-    if (i != 3) {
+    if (i != 4) {
       while (passCriteria[i] !== "y" && passCriteria[i] !== "n") {
         passCriteria[i] = prompt("Require a " + strCriteria[i] + "? (y/n)");
       }
@@ -28,11 +28,14 @@ function passwordCriteria() {
 
 function generatePassword() {
   criteria = passwordCriteria();
-  let charset = "abcdefghijklmnopqrstuvwxyz";
+  let charset = "";
+  let lower = "abcdefghijklmnopqrstuvwxyz";
   let number = "0123456789";
   let symbol = "*;<>()[]{}#$?!^|:";
   let capital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  
+  if (criteria[3]) {
+    charset = charset + lower;
+  }
   if (criteria[2]) {
     charset = charset + capital;
   }
@@ -44,7 +47,7 @@ function generatePassword() {
   }
 
   let generatedPassword = [];
-  for (i=0; i < criteria[3]; i++) {
+  for (i=0; i < criteria[4]; i++) {
     generatedPassword.push(charset[Math.floor(Math.random() * charset.length)]);
   }
 
