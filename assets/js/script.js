@@ -3,7 +3,7 @@ var generateBtn = document.querySelector("#generate");
 
 function passwordCriteria() {
   let number, symbol, capital, lower, length;
-  let strCriteria = ["number", "symbol", "capital", "lower", "length"]
+  let strCriteria = ["number", "symbol", "capital", "lowercase letter", "length"]
   let passCriteria = [number, symbol, capital, lower, length = 0];
 
   for (i=0; i < passCriteria.length; i++) {
