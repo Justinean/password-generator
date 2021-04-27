@@ -22,7 +22,6 @@ function passwordCriteria() {
       }
     }
   }
-
   return passCriteria;
 }
 
@@ -76,9 +75,7 @@ function generatePassword() {
     if (cri[0] === criteria[0] && cri[1] === criteria[1] && cri[2] === criteria[2] && cri[3] === criteria[3]) {
       infinite = false;
       break;
-    } else {
-      console.log("Failed");
-    }
+    } 
   }
 
   let password = generatedPassword;
