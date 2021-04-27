@@ -9,7 +9,7 @@ function passwordCriteria() {
   for (i=0; i < passCriteria.length; i++) {
     if (i != 4) {
       while (passCriteria[i] !== "y" && passCriteria[i] !== "n") {
-        passCriteria[i] = prompt("Require a " + strCriteria[i] + "? (y/n)");
+        passCriteria[i] = prompt("Require a " + strCriteria[i] + "? (y/n)").toLowerCase();
       }
       if (passCriteria[i] === "y") {
         passCriteria[i] = true;
@@ -29,29 +29,57 @@ function passwordCriteria() {
 function generatePassword() {
   criteria = passwordCriteria();
   let charset = "";
-  let lower = "abcdefghijklmnopqrstuvwxyz";
-  let number = "0123456789";
-  let symbol = "*;<>()[]{}#$?!^|:";
-  let capital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  if (criteria[3]) {
-    charset = charset + lower;
-  }
-  if (criteria[2]) {
-    charset = charset + capital;
-  }
-  if (criteria[0]) {
-    charset = charset + number;
-  }
-  if (criteria[1]) {
-    charset = charset + symbol;
+  let lowers = "abcdefghijklmnopqrstuvwxyz";
+  let numbers = "0123456789";
+  let symbols = "*;<>()[]{}#$?!^|:";
+  let capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let charsets = [numbers, symbols, capitals, lowers];
+  
+  // Adds characters to variable "charset" based on criteria
+  for (i=0; i < charsets.length; i++) {
+    if (criteria[i]) {
+      charset = charset + charsets[i];
+    }
   }
 
-  let generatedPassword = [];
-  for (i=0; i < criteria[4]; i++) {
-    generatedPassword.push(charset[Math.floor(Math.random() * charset.length)]);
-  }
+  let num, sym, cap, low;
+  let cri = [num, sym, cap, low];
+  // Loops until all criteria is met
+  let infinite = true;
+  while (infinite) {
+    for (i in cri) {
+      cri[i] = false;
+    }
+    // Clears generatedPassword
+    var generatedPassword = "";
 
-  generatedPassword = generatedPassword.join("");
+    // Generates a password and stores it in variable- generatedPassword
+    for (j=0; j < criteria[4]; j++) {
+      generatedPassword = generatedPassword + (charset[Math.floor(Math.random() * charset.length)]);
+    }
+
+    // Checks to see what characters the password has
+    for (i in generatedPassword) {
+      for (randvar=0; randvar < charsets.length; randvar++) {
+        for (l in charsets[randvar]) {
+          if (generatedPassword[i] === charsets[randvar][l]) {
+            cri[randvar] = true;
+            break;
+          }
+        }
+        if (cri[randvar] === true) {
+          break;
+        }
+      }
+    }
+    // Checks to see if criteria is met
+    if (cri[0] === criteria[0] && cri[1] === criteria[1] && cri[2] === criteria[2] && cri[3] === criteria[3]) {
+      infinite = false;
+      break;
+    } else {
+      console.log("Failed");
+    }
+  }
 
   let password = generatedPassword;
   return password;
