@@ -6,6 +6,6 @@ Such requirements include:
 * Uppercase 
 * Symbols 
 * Length \
-!["Password generator"](./assets/password.png)
+!["Password generator"](./assets/images/password.png)
 
 https://justinean.github.io/password-generator/
