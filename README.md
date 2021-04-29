@@ -5,7 +5,7 @@ Such requirements include:
 * Lowercase 
 * Uppercase 
 * Symbols 
-* Length 
+* Length \
 !["Password generator"](./assets/password.png)
 
 https://justinean.github.io/password-generator/
