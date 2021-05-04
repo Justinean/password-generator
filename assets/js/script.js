@@ -8,25 +8,32 @@ function passwordCriteria() {
 
   for (i=0; i < passCriteria.length; i++) {
     if (i != 4) {
-      while (passCriteria[i] !== "y" && passCriteria[i] !== "n") {
-        passCriteria[i] = prompt("Require a " + strCriteria[i] + "? (y/n)").toLowerCase();
-      }
-      if (passCriteria[i] === "y") {
-        passCriteria[i] = true;
-      } else {
-        passCriteria[i] = false;
-      }
+      passCriteria[i] = confirm("Require a " + strCriteria[i] + "?");
     } else {
       while (!(passCriteria[i] >= 8 && passCriteria[i] <= 128)) {
         passCriteria[i] = parseInt(prompt(strCriteria[i] + "? (8-128)"));
       }
     }
   }
-  return passCriteria;
+  var pog;
+  for (i=0; i < passCriteria.length; i++) {
+    if (passCriteria[i] === true) {
+      pog = true;
+    }
+  }
+  if (pog) {
+    return passCriteria;
+  } else {
+    return false;
+  }
 }
 
 function generatePassword() {
   criteria = passwordCriteria();
+  while (criteria === false) {
+    alert("Please select a criteria");
+    criteria = passwordCriteria();
+  }
   let charset = "";
   let lowers = "abcdefghijklmnopqrstuvwxyz";
   let numbers = "0123456789";
