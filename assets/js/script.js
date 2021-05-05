@@ -15,12 +15,10 @@ function passwordCriteria() {
       }
     }
   }
-  var pog;
+  var pog = false;
   for (i=0; i < passCriteria.length; i++) {
     if (passCriteria[i] === true) {
       pog = true;
-    } else {
-      pog = false;
     }
   }
   if (pog) {
